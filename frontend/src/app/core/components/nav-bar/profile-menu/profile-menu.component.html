@@ -1,0 +1,9 @@
+<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+    <button class="btn account-dropdown" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+      <button ngbDropdownItem>My Profile</button>
+      <button ngbDropdownItem>Logout</button>
+    </div>
+</div>

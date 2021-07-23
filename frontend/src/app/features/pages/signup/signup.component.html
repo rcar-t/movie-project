@@ -1,0 +1,66 @@
+<div class="signup-container">
+    <form class="signup-form" #form="ngForm" (ngSubmit)="onSubmit()">
+        <div class="signup-form-group">
+            <label class='signup-label'>FIRST NAME</label>
+            <input 
+                class="signup-input" 
+                id="firstName" 
+                name='firstName' 
+                type="firstName" 
+                [(ngModel)] = "user.firstName"
+                placeholder="Enter your first name"
+                #firstName="ngModel"
+            />
+            <div [hidden]="firstName.value || firstName.pristine" class="error">
+                First Name is required
+            </div>
+        </div>
+        <div class="signup-form-group">
+            <label class='signup-label'>LAST NAME</label>
+            <input 
+                class="signup-input" 
+                id="lastName" 
+                name='lastName' 
+                type="lastName" 
+                [(ngModel)] = "user.lastName"
+                placeholder="Enter your last name"
+                #lastName="ngModel"
+            />
+            <div [hidden]="lastName.value || lastName.pristine" class="error">
+                Last Name is required
+            </div>
+        </div>
+        <div class="signup-form-group">
+            <label class='signup-label'>EMAIL</label>
+            <input 
+                class="signup-input" 
+                id="email" 
+                name='email' 
+                type="email" 
+                [(ngModel)] = "user.email"
+                placeholder="Enter your email"
+                #email="ngModel"
+            />
+            <div [hidden]="email.value || email.pristine" class="error">
+                Email is required
+            </div>
+        </div>
+        <div class="signup-form-group">
+            <label class='signup-label'>PASSWORD</label>
+            <input 
+                class="signup-input" 
+                id="password" 
+                name='password' 
+                type="password"
+                [(ngModel)] = "user.password"
+                placeholder="Enter your password"
+            />        
+        </div>
+        <button class="signup-submit" type="submit">SIGN UP</button>
+        <p class="login">
+            Already have an account? 
+            <a routerLink="/login">Login here!</a>
+        </p>
+    </form>
+    
+</div>

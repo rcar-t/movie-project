@@ -1,0 +1,15 @@
+<app-banner></app-banner>
+<div class="movies">
+    <ng-container *ngFor="let movie of movies">
+        <div class="movie" (click)="openMovieDetails(movie.id)">
+            <div class="movie-poster-container">
+                <img src="{{posterUrl + movie.poster_path}}" alt="movie poster" class="movie-poster">
+            </div>
+            <div class="movie-description">
+                <p class="movie-title">{{ movie.title }}</p>
+                <div class="movie-rating">Rating: {{movie.vote_average}}</div>
+                <ngb-rating [max]="10" [(rate)]= "movie.vote_average" [readonly]="true"></ngb-rating>
+            </div>
+        </div>
+    </ng-container>
+</div>
