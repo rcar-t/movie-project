@@ -38,6 +38,7 @@ public class UserModel {
 	@SequenceGenerator(name="id_Sequence", sequenceName = "ID_SEQ")
 	private long id;
 	
+	@Column(unique=true)
 	private String email;
 	
 	private String password;

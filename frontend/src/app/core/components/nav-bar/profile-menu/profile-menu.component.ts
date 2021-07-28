@@ -10,8 +10,12 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 })
 export class ProfileMenuComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void { }
 
+  logout(): void {
+    this.authenticationService.logout();
+  }
 }

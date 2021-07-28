@@ -1,40 +1,48 @@
 import { Injectable } from '@angular/core';
 import { NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators'
+import { Alert, AlertType } from '../models/alert';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
 
-  private subject = new Subject<any>();
-  private keepAfterRouteChange = false; 
+  private subject = new Subject<Alert>();
+  private defaultId = 'default-alert'; 
 
-  constructor(private router: Router) { 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.keepAfterRouteChange = false;
-      } else {
-        this.clear();
-      }
-    });
+  constructor() {}
+
+  onAlert(id = this.defaultId): Observable<Alert> {
+    return this.subject.asObservable().pipe(
+      filter(x => x && x.id === id)
+    );
   }
 
-  getAlert(): Observable<any> {
-    return this.subject.asObservable();
+  success(message: string, options?:any) {
+    this.alert(new Alert({...options, type: AlertType.Success, message}))
   }
 
-  success(message: string, keepAfterRouteChange = false) {
-    this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next({ type: 'success', text: message });
+  error(message: string, options?:any) {
+    this.alert(new Alert({...options, type: AlertType.Error, message}))
   }
 
-  error(message: string, keepAfterRouteChange = false){
-    this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next({ type: 'error', text: message });
+  info(message: string, options?:any) {
+    this.alert(new Alert({...options, type: AlertType.Info, message}))
   }
 
-  clear() {
-    this.subject.next();
+  warn(message: string, options?:any) {
+    this.alert(new Alert({...options, type: AlertType.Warning, message}))
   }
+
+  alert(alert: Alert) {
+    alert.id = alert.id || this.defaultId;
+    this.subject.next(alert);
+  }
+
+  clear(id = this.defaultId) {
+    this.subject.next(new Alert({ id }));
+  }
+  
 }

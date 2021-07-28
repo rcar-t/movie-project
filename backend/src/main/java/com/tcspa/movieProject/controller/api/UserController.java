@@ -40,9 +40,4 @@ public class UserController {
 		
 		return userService.signup(userDto);
 	}
-	
-	@GetMapping("/me")
-	public Response getUserByEmail(@RequestBody LoginRequest loginRequest) {
-		return Response.ok().setPayload(loginRequest);
-	}
 }

@@ -27,7 +27,6 @@ public class AuthenticationController {
 	
 	@PostMapping("/login")
 	public Response login(@RequestParam Map<String,String> requestParams) {
-		System.out.println("in controller");
 		LoginRequest loginReq = new LoginRequest()
 				.setEmail(requestParams.get("email"))
 				.setToken(requestParams.get("token"));

@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/core/models/movie';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { MovieService } from 'src/app/core/services/movie.service';
+import { OpenAsGuestModalComponent } from '../../components/open-as-guest-modal/open-as-guest-modal.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -15,10 +18,14 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   movie: Movie;
   posterUrl: string;
   private subscriptions: Subscription;
+  loggedIn: boolean = false;
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
     private movieService: MovieService,
+    private modalService: NgbModal,
+    private authService: AuthenticationService,
+    private router: Router
   ) { 
     this.movieId = '';
     this.posterUrl = '';
@@ -52,6 +59,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
           this.posterUrl = base_url;
         })
     );
+  }
+
+  isLoggedIn(): boolean {
+    this.subscriptions.add(
+      this.authService.isUserLoggedIn()
+      .subscribe( (result) => {
+        this.loggedIn = result;
+      }
+    ));
+    return this.loggedIn;
+  }
+
+  openLogin() {
+    if (this.isLoggedIn()) {
+      this.router.navigate(['book', this.movieId]);
+    } else {
+      const modalRef = this.modalService.open(OpenAsGuestModalComponent, { centered: true });
+      modalRef.componentInstance.name = 'Open as Gueat';
+    }
+    
   }
 
   ngOnDestroy(): void {

@@ -35,11 +35,12 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn(): Observable<boolean> {
-    return this.currentUser ? of(true) : of(false);
+    return this.currentUserValue ? of(true) : of(false);
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next({} as User);
+    this.currentUserSubject = new BehaviorSubject<User>({} as User);
+    location.reload();
   }
 }

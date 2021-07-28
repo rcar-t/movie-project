@@ -23,6 +23,11 @@ import { MovieDetailsComponent } from './features/pages/movie-details/movie-deta
 import { ProfileMenuComponent } from './core/components/nav-bar/profile-menu/profile-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { LoadingComponent } from './core/components/loading/loading.component';
+import { LogService } from './core/logging/log.service';
+import { LogPublisherService } from './core/logging/log-publisher.service';
+import { OpenAsGuestModalComponent } from './features/components/open-as-guest-modal/open-as-guest-modal.component';
+import { MovieBookingComponent } from './features/pages/movie-booking/movie-booking.component';
 
 
 @NgModule({
@@ -37,6 +42,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MovieListComponent,
     MovieDetailsComponent,
     ProfileMenuComponent,
+    LoadingComponent,
+    OpenAsGuestModalComponent,
+    MovieBookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +69,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorsInterceptor, 
       multi: true,
-    }
+    },
+    LogService,
+    LogPublisherService
   ],
   bootstrap: [AppComponent]
 })
