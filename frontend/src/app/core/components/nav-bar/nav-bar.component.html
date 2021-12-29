@@ -1,0 +1,29 @@
+<nav class="nav">
+    <div class = "logo-wrapper" routerLink="/">
+        <img class="logo" src="/assets/logo.svg">
+        <span class="logo-title">MovieProject</span>
+    </div>
+    <div class="search-wrapper">
+        <form class="search-form" #form="ngForm" (ngSubmit)="onSubmit(form)" [ngFormOptions]="{updateOn:'blur'}">
+            <input 
+                class="search-input" 
+                name="search" 
+                ngModel 
+                placeholder="Find a Movie"
+                [matAutocomplete] = "auto"
+                [formControl] = "searchControl"
+            />
+            <button class="search-button">
+                <mat-icon>search</mat-icon>
+            </button>
+        </form>
+        <button *ngIf="loggedIn === false" class="signup" routerLink="/sign-up">SIGN UP</button>
+        <app-profile-menu *ngIf="loggedIn"></app-profile-menu>
+    </div>
+</nav>
+
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+</mat-autocomplete>

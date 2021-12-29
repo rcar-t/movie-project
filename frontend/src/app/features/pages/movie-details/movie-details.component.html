@@ -1,0 +1,39 @@
+<div class="movie">
+    <div class="movie-poster-container">
+        <img src="{{ posterUrl + movie.poster_path}}" alt="movie poster" class="movie-poster">
+    </div>
+    <div class="movie-details-container">
+        <h1 class="movie-title">{{ movie.title }}</h1>
+        <p class="movie-tagline">{{ movie.tagline }}</p>
+        <div class="movie-details">
+            <h3 class="header">Details</h3>
+            <table class="movie-table">
+                <tr>
+                    <td class="movie-details-label">Release Date: </td>
+                    <td class="movie-details-content">{{ movie.release_date }}</td>
+                    <td class="movie-details-label">Language: </td>
+                    <td class="movie-details-content">{{ movie.original_language | formatLanguage }}</td>
+                </tr>
+                <tr>
+                    <td class="movie-details-label">Genre: </td>
+                    <td class="movie-details-content">
+                        <span *ngFor="let genre of movie.genres; let last = last">
+                            {{ genre.name }}<span *ngIf="!last">, </span>
+                        </span>
+                    </td>
+                    <td class="movie-details-label">Duration: </td>
+                    <td class="movie-details-content">{{ movie.runtime }} mins</td>
+                </tr>
+            </table>
+        </div>
+        <div class="movie-synopsis">
+            <h3 class="header">Synopsis</h3>
+            <p class="movie-overview">{{ movie.overview }}</p>
+        </div>
+        <div class="movie-links">
+            <button class="movie-btn-homepage"><a href="{{ movie.homepage }}" target="_blank">Movie Homepage</a></button>
+            <button class="movie-btn-book" (click)="openLogin()">Book Now</button>
+        </div>
+    </div>
+    
+</div>

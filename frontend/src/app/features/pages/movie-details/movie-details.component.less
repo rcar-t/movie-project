@@ -1,0 +1,122 @@
+.movie {
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 20px auto;
+
+    &-poster-container {
+        width: 333px;
+        box-sizing: border-box;
+        position:relative;
+        background-color: black;
+        height: 500px;
+    }
+
+    &-poster {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        height: 500px;
+    }
+
+    &-details-container {
+        width: 666px;
+        box-sizing: border-box;
+        padding: 10px 30px;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 500px;
+    }
+
+    &-title {
+        font-size: 36px;
+        font-weight: 700;
+        color:#fff;
+        margin-bottom: 5px;
+    }
+
+    &-tagline {
+        font-style: italic;
+        font-size: 12px;
+    }
+
+    &-table {
+        margin: 10px 0;
+        width: 100%;
+        
+        td {
+            padding: 5px 0;
+        }
+    }
+
+    &-details-label {
+        font-weight: 600;
+        color: #f6e7ce;
+    }
+
+    &-overview {
+        color: #fff;
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        text-align: justify;
+    }
+
+    &-links {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        button {
+            padding: 5px 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 170px;
+            font-weight: 700;
+        }
+    }
+
+    &-btn {
+        &-homepage {
+            background-color: #e0aa50;
+        
+            a {
+                color: #202020;
+                font-weight: 700;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #e9c485;
+            }
+        }
+
+        &-book {
+            margin-left: 20px;
+
+            &:hover {
+                background-color: #f6e7ce;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.header {
+    color: #e9c485;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
